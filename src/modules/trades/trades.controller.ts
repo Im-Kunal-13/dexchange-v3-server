@@ -10,6 +10,9 @@ import { InsertTradeBody } from "./trades.schema"
 */
 export const insertTrade = expressAsyncHandler(
     async (req: Request<{}, {}, InsertTradeBody>, res) => {
+
+        console.log(req.body)
+        
         const { amount, date, price, side, txHash, address } = req.body
 
         if (!amount || !date || !price || !side || !txHash || !address) {

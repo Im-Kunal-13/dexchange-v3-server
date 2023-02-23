@@ -3,7 +3,7 @@ import { insertTrade, getTrades } from "./trades.controller"
 
 const router = express.Router()
 
-router.post("/", insertTrade)
 router.get("/", getTrades)
+router.post("/", insertTrade)
 
 export default router

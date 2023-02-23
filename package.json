@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "ts-node src/index.ts",
-        "start": "ts-node src/index.ts"
+        "server": "nodemon src/index.ts"
     },
     "dependencies": {
         "@typegoose/typegoose": "^9.11.0",
@@ -23,6 +23,7 @@
         "mongoose": "^6.5.1",
         "nodemon": "^2.0.20",
         "pino": "^8.4.0",
+        "socket.io": "^4.6.1",
         "ts-node": "^10.9.1",
         "zod": "^3.17.10",
         "zod-express-middleware": "^1.4.0"

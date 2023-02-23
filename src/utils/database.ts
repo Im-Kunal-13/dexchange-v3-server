@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import logger from "./logger"
 import dotenv from "dotenv"
+import { io } from "../index"
 
 dotenv.config()
 
@@ -13,6 +14,23 @@ export const connectToDatabase = async () => {
     try {
         await mongoose.connect(DB_CONNECTION_STRING, { dbName: "dexchange" })
         logger.info("Connected to Database")
+
+        // Set up change stream listener for 'trades' collection
+        const tradeCollection = mongoose.connection.collection("trades")
+
+        const changeStream = tradeCollection.watch()
+
+        changeStream.on("change", (change) => {
+            if (change.operationType === "insert") {
+                io.emit("new_trade_inserted", {
+                    amount: change?.fullDocument?.amount,
+                    date: change?.fullDocument?.date,
+                    price: change?.fullDocument?.price,
+                    side: change?.fullDocument?.side,
+                    txHash: change?.fullDocument?.txHash,
+                })
+            }
+        })
     } catch (error) {
         logger.error(error, "Failed to connect to the database. Good bye!")
         process.exit(1)
