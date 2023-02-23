@@ -1,7 +1,9 @@
 import express from "express"
-import { getTrades } from "./trades.controller"
+import { insertTrade, getTrades } from "./trades.controller"
 
 const router = express.Router()
 
-router.get("", getTrades)
+router.post("/", insertTrade)
+router.get("/", getTrades)
+
 export default router

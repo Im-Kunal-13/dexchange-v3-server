@@ -10,6 +10,7 @@ const {
 } = require("./utils/database")
 
 import tradesRoute from "./modules/trades/trades.route"
+// const tradesRoute = require("./modules/trades/trades.route")
 
 //options for cors midddleware
 const options = {
