@@ -10,19 +10,19 @@ import tradesRoute from "./modules/trades/trades.route"
 // const tradesRoute = require("./modules/trades/trades.route")
 
 //options for cors midddleware
-const options = {
-    allowedHeaders: [
-        "Origin",
-        "X-Requested-With",
-        "Content-Type",
-        "Accept",
-        "X-Access-Token",
-    ],
-    credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: "*",
-    preflightContinue: false,
-}
+// const options = {
+//     allowedHeaders: [
+//         "Origin",
+//         "X-Requested-With",
+//         "Content-Type",
+//         "Accept",
+//         "X-Access-Token",
+//     ],
+//     credentials: true,
+//     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+//     origin: "*",
+//     preflightContinue: false,
+// }
 
 dotenv.config()
 
@@ -30,10 +30,10 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT
 
-app.use(cookieParser())
-app.use(express.json())
-app.use(cors(options))
-app.use(helmet())
+// app.use(cookieParser())
+// app.use(express.json())
+app.use(cors())
+// app.use(helmet())
 
 // Routes
 app.use("/api/trades", tradesRoute)
