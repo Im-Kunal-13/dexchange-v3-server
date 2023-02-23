@@ -24,7 +24,7 @@ import tradesRoute from "./modules/trades/trades.route"
 //     preflightContinue: false,
 // }
 
-dotenv.config()
+dotenv.config() 
 
 // Initializing express app.
 const app = express()
