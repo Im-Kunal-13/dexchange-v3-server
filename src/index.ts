@@ -4,10 +4,7 @@ const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const helmet = require("helmet")
 
-const {
-    connectToDatabase,
-    disconnectFromDatabase,
-} = require("./utils/database")
+const { connectToDatabase } = require("./utils/database")
 
 import tradesRoute from "./modules/trades/trades.route"
 // const tradesRoute = require("./modules/trades/trades.route")
@@ -45,25 +42,3 @@ const server = app.listen(PORT, async () => {
     await connectToDatabase()
     console.log(`Server listening at http://localhost:${PORT}`)
 })
-
-const signals = ["SIGTERM", "SIGINT"]
-
-const gracefulShutdown = (signal: any) => {
-    process.on(signal, async () => {
-        console.log("Goodbye, got signal", signal)
-        server.close()
-
-        await disconnectFromDatabase()
-
-        // disconnect from the db.
-
-        console.log("My work here is done ")
-
-        process.exit(0)
-    })
-}
-
-// Running graceful shutdown if we get the signal.
-for (let i = 0; i < signals.length; i++) {
-    gracefulShutdown(signals[i])
-}
